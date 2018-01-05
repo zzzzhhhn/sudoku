@@ -25,6 +25,66 @@ body {
   h1 {
     margin: 0;
     padding: 0;
+    font-weight: 500;
+  }
+}
+
+.container {
+  padding-left: 5%;
+
+  .row {
+    >span {
+      display: inline-block;
+      cursor: pointer;
+      text-align: center;
+      width: 10%;
+      height: 24px;
+      line-height: 24px;
+      border: 1px solid #ccc;
+      border-bottom-width: 0;
+      border-right-width: 0;
+      background: white;
+
+      &.col_g_left {
+        border-left-width: 0;
+      }
+      &.col_g_right {
+        border-right-width: 2px;
+      }
+
+      &:first-child {
+        border-left-width: 2px;
+      }
+      &:last-child {
+        border-right-width: 2px;
+      }
+
+    }
+
+    &.row_g_top {
+      >span {
+        border-top-width: 0;
+      }
+    }
+    &.row_g_bottom {
+      >span {
+        border-bottom-width: 2px;
+      }
+    }
+
+    &:first-child {
+      >span {
+        border-top-width: 2px;
+      }
+    }
+
+    &:last-child {
+      >span {
+        border-bottom-width: 2px;
+      }
+    }
+
+
   }
 }
 
@@ -58,6 +118,7 @@ body {
       border: 1px solid #ccc;
       background: transparent;
       border-right-width: 0;
+      font-family: 'Consolas', '微软雅黑';
       &:last-child {
         border-right-width: 1px;
       }

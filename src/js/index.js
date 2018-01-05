@@ -1,14 +1,13 @@
 /**
  * Created by Administrator on 2018/1/2.
  */
-const tolkit = require('./toolkit');
+const Grid = require('./ui/grid');
+const Generator = require('./core/generator');
 
-const matrix = tolkit.makeMatrix();
+const grid = new Grid($('#container'))
+grid.build();
+grid.layout();
 
-
-console.log(matrix)
-
-const a = Array.from({ length: 9}, (v, i)  => i);
-console.log(a);
-const shuffle = tolkit.shuffle(a);
-console.log(shuffle);
+const generator = new Generator();
+generator.generate();
+console.log(generator.matrix);
