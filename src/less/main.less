@@ -45,6 +45,37 @@ body {
       border-right-width: 0;
       background: white;
 
+      &.empty {
+        color: white;
+      }
+
+      &.fixed {
+        background: #eee;
+      }
+
+      &.mark1 {
+        background: lightblue;
+
+        &.empty {
+          color: lightblue;
+        }
+      }
+
+      &.mark2 {
+        background: lightgreen;
+
+        &.empty {
+          color: lightgreen;
+        }
+      }
+
+      &.error {
+        background: lightpink;
+        &.empty {
+          color: lightpink;
+        }
+      }
+
       &.col_g_left {
         border-left-width: 0;
       }
@@ -90,6 +121,20 @@ body {
 
 .hidden {
   display: none;
+}
+
+@popupCellSize: 40px;
+.popup-num {
+  .container();
+
+  position: absolute;
+  padding-left: 0;
+
+  > .row >span {
+    width: @popupCellSize;
+    height: @popupCellSize;
+    line-height: @popupCellSize;
+  }
 }
 
 .dashboard {

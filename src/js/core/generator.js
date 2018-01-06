@@ -6,7 +6,7 @@ module.exports = class Generator {
     //入口
     generate() {
         while(!this.internalGenerate()) {
-            return console.warn('try again');
+            console.warn('try again');
         }
     }
 
@@ -16,7 +16,7 @@ module.exports = class Generator {
             .map(row => row.map((v,i) => i))
             .map(row => Toolkit.matrix.shuffle(row));
 
-        for (let i = 0; i < 9; i++) {
+        for (let i = 1; i <= 9; i++) {
            if(!this.fillNumber(i)){
                 return false;
            }
