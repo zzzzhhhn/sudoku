@@ -1,9 +1,8 @@
 /**
  * Created by Administrator on 2018/1/2.
  */
-const Grid = require('./ui/grid');
-const Checker = require('./core/checker');
-const PopupNumbers = require('./ui/popupnumbers');
+import Grid from './ui/grid';
+import PopupNumbers from './ui/popupnumbers';
 
 const grid = new Grid($('#container'))
 grid.build();

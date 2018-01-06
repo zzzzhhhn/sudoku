@@ -1,10 +1,10 @@
-const ToolKit = require('./toolkit');
+import ToolKit from './toolkit';
 //检查数独解决方案
-function checkArray(array) {
-    const markArr = ToolKit.matrix.makeRow(true);
-    const length = array.length;
+function checkArray(array: number[]): boolean[] {
+    const markArr: boolean[] = ToolKit.matrix.makeRow(true);
+    const length: number = array.length;
     for (let i = 0; i< length - 1; i++) {
-        const value = array[i];
+        const value: number = array[i];
         if(!markArr[i]) {
             continue;
         }
@@ -24,18 +24,25 @@ function checkArray(array) {
     return markArr;
 }
 
-module.exports = class  Checker {
-    constructor(matrix) {
+export class  Checker {
+    
+    private _matrix: number[][];
+
+    private _matrixMarks: boolean[][];
+
+    private _success: boolean = false;
+
+    constructor(matrix: number[][]) {
         this._matrix = matrix;
         this._matrixMarks = ToolKit.matrix.makeMatrix(true);
     }
-    get matrixMarks() {
+    get matrixMarks(): boolean[][] {
         return this._matrixMarks;
     }
-    get isSuccess() {
+    get isSuccess(): boolean {
         return this._success;
     }
-    check() {
+    check(): boolean {
         this.checkRows();
         this.checkCols();
         this.checkBoxes();
@@ -44,7 +51,7 @@ module.exports = class  Checker {
         return this._success;
     }
 
-    checkRows() {
+    private checkRows(): void {
         for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
             const row = this._matrix[rowIndex];
             const marks = checkArray(row);
@@ -57,7 +64,7 @@ module.exports = class  Checker {
         }
     }
 
-    checkCols() {
+    private checkCols(): void {
         for (let colIndex = 0; colIndex < 9 ; colIndex++) {
             const cols = [];
             for(let rowIndex = 0; rowIndex < 9; rowIndex++) {
@@ -74,7 +81,7 @@ module.exports = class  Checker {
         }
     }
 
-    checkBoxes() {
+    private checkBoxes(): void {
         for(let boxIndex = 0; boxIndex < 9; boxIndex++) {
             const boxes = ToolKit.box.getBoxCells(this._matrix,boxIndex);
             const marks = checkArray(boxes);
@@ -88,3 +95,5 @@ module.exports = class  Checker {
     }
 
 }
+
+export default Checker;

@@ -1,16 +1,21 @@
 //生成数独解决方案
 
-const Toolkit = require('./toolkit');
+import Toolkit from './toolkit';
 
-module.exports = class Generator {
+export class Generator {
+
+    public matrix: number[][];
+    
+    private orders: number[][];
+
     //入口
-    generate() {
+    generate(): void {
         while(!this.internalGenerate()) {
             console.warn('try again');
         }
     }
 
-    internalGenerate() {
+    private internalGenerate(): boolean {
         this.matrix = Toolkit.matrix.makeMatrix();
         this.orders = Toolkit.matrix.makeMatrix()
             .map(row => row.map((v,i) => i))
@@ -24,19 +29,19 @@ module.exports = class Generator {
         return true;
     }
 
-    fillNumber(n) {
+    private fillNumber(n: number): boolean {
         return this.fillRow(n,0);
     }
 
-    fillRow(n,rowIndex) {
+    private fillRow(n: number, rowIndex: number): boolean {
         if(rowIndex > 8) {
             return true;
         }
 
-        const row = this.matrix[rowIndex];
-        const order = this.orders[rowIndex];
+        const row: number[]= this.matrix[rowIndex];
+        const order: number[] = this.orders[rowIndex];
         for(let i = 0; i < 9; i++) {
-            const colIndex = order[i];
+            const colIndex: number = order[i];
             //有值跳过
             if(row[colIndex] !== 0) {
                 continue;
@@ -62,3 +67,5 @@ module.exports = class Generator {
     }
 
 }
+
+export default Generator;

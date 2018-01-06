@@ -1,10 +1,14 @@
 //生成九宫格
-const Toolkit = require('../core/toolkit');
-const Sudoku = require('../core/sudoku');
-const Checker = require('../core/checker');
+import Toolkit from '../core/toolkit';
+import Sudoku from '../core/sudoku';
+import Checker from '../core/checker';
+import PopupNumbers from './popupnumbers';
 
-module.exports = class Grid {
-    constructor(container) {
+export class Grid {
+    
+    private _$container: JQuery;
+
+    constructor(container: JQuery) {
         this._$container = container;
     }
 
@@ -41,11 +45,18 @@ module.exports = class Grid {
      * 检查用户输入
      */
     check() {
-        const data = this._$container.children().map((rowIndex, div) => {
-            return $(div).children().map((colIndex, span) => parseInt($(span).text()) || 0);
-        }).toArray().map($data => $data.toArray());
+        const data = this._$container.children()
+        .toArray()
+        .map(div => {
+            return $(div).children()
+            .toArray()
+            .map(span => parseInt($(span).text(),10) || 0);
+        });
+
         const checker = new Checker(data);
+
         checker.check();
+
         if(checker.isSuccess) {
             return true;
         }else {
@@ -58,7 +69,7 @@ module.exports = class Grid {
                         $(span).addClass('error');
                     }
                 })
-            })
+            });
             return false;
         }
     }
@@ -78,11 +89,11 @@ module.exports = class Grid {
     }
 
     layout() {
-        const width = $('span:first',this._$container).width();
+        const width: any = $('span:first',this._$container).width();
         $('span',this._$container).height(width).css({'lineHeight': `${width}px`,'font-size':width < 32 ? `${width/2}` : ''});
     }
 
-    bindPopup(popupnumber) {
+    bindPopup(popupnumber: PopupNumbers) {
         this._$container.on('click','span',e => {
             const $cell = $(e.target);
             if($cell.is('.fixed')) {
@@ -92,3 +103,4 @@ module.exports = class Grid {
         })
     }
 }
+export default Grid;
